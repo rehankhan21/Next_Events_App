@@ -1,18 +1,41 @@
 import { useRouter } from "next/router";
+import useSWR from "swr";
+import { Fragment, useEffect, useState } from "react";
+
 import { getFilteredEvents } from "../../../helpers/api-util";
 import EventList from "../../../components/events/events/EventList";
 import ResultsTitle from "../../../components/events/events/ResultsTitle";
-import { Fragment } from "react";
 import Button from "../../../components/events/ui/button";
 import ErrorAlert from "../../../components/events/ui/ErrorAlert";
 
 function FilteredEventsPage(props) {
+  //const [loadedEvents, setLoadedEvents] = useState();
+
   const router = useRouter();
-  // const filterData = router.query.slug;
+  //const filterData = router.query.slug;
+
+  // const { data, error } = useSWR(
+  //   "https://nextevents-8aaf1-default-rtdb.firebaseio.com/events.json"
+  // );
+
+  // useEffect(() => {
+  //   if (data) {
+  //     const events = [];
+
+  //     for (const key in data) {
+  //       events.push({
+  //         id: key,
+  //         ...data[key],
+  //       });
+  //     }
+
+  //     setLoadedEvents(events);
+  //   }
+  // }, [data]);
 
   // // when the componenet renders for the first time the url data is null
   // // it automatically renders again but with the data.
-  // if (!filterData) {
+  // if (!loadedEvents) {
   //   return <p className="center">Loading...</p>;
   // }
 
@@ -22,6 +45,14 @@ function FilteredEventsPage(props) {
   // // + in front of the string turns it into a int
   // const numYear = +filteredYear;
   // const numMonth = +filteredMonth;
+
+  // const filteredEvents = loadedEvents.filter((event) => {
+  //   const eventDate = new Date(event.date);
+  //   return (
+  //     eventDate.getFullYear() === numYear &&
+  //     eventDate.getMonth() === numMonth - 1
+  //   );
+  // });
 
   if (props.hasError) {
     return (
