@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Fragment, useEffect, useState } from "react";
+import Head from "next/head";
 
 import { getFilteredEvents } from "../../../helpers/api-util";
 import EventList from "../../../components/events/events/EventList";
@@ -36,7 +37,12 @@ function FilteredEventsPage(props) {
   // // when the componenet renders for the first time the url data is null
   // // it automatically renders again but with the data.
   // if (!loadedEvents) {
-  //   return <p className="center">Loading...</p>;
+  //   return (
+  //     <Fragment>
+  //       {pageHeadData}
+  //       <p className="center">Loading...</p>
+  //     </Fragment>
+  //   );
   // }
 
   // const filteredYear = filterData[0];
@@ -53,6 +59,16 @@ function FilteredEventsPage(props) {
   //     eventDate.getMonth() === numMonth - 1
   //   );
   // });
+
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${props.date.month}/${props.date.year}`}
+      />
+    </Head>
+  );
 
   if (props.hasError) {
     return (
@@ -72,6 +88,7 @@ function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events for chosen filter</p>
         </ErrorAlert>
@@ -85,10 +102,11 @@ function FilteredEventsPage(props) {
   const date = new Date(props.date.year, props.date.month - 1);
 
   return (
-    <div>
+    <Fragment>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
-    </div>
+    </Fragment>
   );
 }
 

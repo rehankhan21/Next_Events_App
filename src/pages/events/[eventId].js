@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Head from "next/head";
 
 import { getEventById, getFeaturedEvents } from "../../../helpers/api-util";
 import EventContent from "../../../components/events/event-detail/event-content";
@@ -20,6 +21,10 @@ function EventDetailPage(props) {
   return (
     //Use react fragment to display compoenets side by side
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name="description" content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
