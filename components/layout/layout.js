@@ -1,6 +1,6 @@
 import MainHeader from "./main-header";
 import Notification from "../ui/notification";
-import NotificationContext from "@/store/notification-context";
+import NotificationContext from "../../store/notification-context";
 
 import { useContext } from "react";
 

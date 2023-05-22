@@ -1,6 +1,6 @@
 import { useRef, useContext } from "react";
 import classes from "./newsletter-registration.module.css";
-import NotificationContext from "@/store/notification-context";
+import NotificationContext from "../../store/notification-context";
 
 function NewsletterRegistration() {
   const emailInputRef = useRef();
@@ -29,10 +29,9 @@ function NewsletterRegistration() {
           return response.json();
         }
 
-        response,
-          json().then((data) => {
-            throw new Error(data.message || "Something went wrong!");
-          });
+        return response.json().then((data) => {
+          throw new Error(data.message || "Something went wrong!");
+        });
       })
       .then((data) => {
         notificationCtx.showNotification({
@@ -43,7 +42,7 @@ function NewsletterRegistration() {
       })
       .catch((error) => {
         notificationCtx.showNotification({
-          title: "Error",
+          title: "Error!",
           message: error.message || "Something went wrong",
           status: "error",
         });

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import "@/styles/globals.css";
 import Layout from "../../components/layout/layout";
-import { NotificationContextProvider } from "@/store/notification-context";
+import { NotificationContextProvider } from "../../store/notification-context";
 
 export default function App({ Component, pageProps }) {
   return (
